@@ -11,11 +11,11 @@ export default function Dossier({id, nom, couleur, datemodif, couverture}) {
   // Menu simple
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
+  const ouvrirMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const fermerMenu = () => {
     setAnchorEl(null);
   };
   
@@ -31,7 +31,7 @@ export default function Dossier({id, nom, couleur, datemodif, couverture}) {
         <h2>{nom}</h2>
         <p>Modifié : {formaterDate(datemodif)}</p>
       </div>
-      <IconButton onClick={handleClick} className="modifier" aria-label="modifier" size="small">   
+      <IconButton onClick={ouvrirMenu} className="modifier" aria-label="modifier" size="small">   
           <MoreVertIcon />
       </IconButton>
       <Menu
@@ -39,10 +39,10 @@ export default function Dossier({id, nom, couleur, datemodif, couverture}) {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={fermerMenu}
       >
-        <MenuItem onClick={handleClose}>Modifier</MenuItem>
-        <MenuItem onClick={handleClose}>Supprimer</MenuItem>
+        <MenuItem onClick={fermerMenu}>Modifier</MenuItem>
+        <MenuItem onClick={fermerMenu}>Supprimer</MenuItem>
       </Menu>
     </article>
   );
