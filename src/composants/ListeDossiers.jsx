@@ -34,9 +34,21 @@ export default function ListeDossiers({utilisateur, etatDossiers}) {
   return (
     <ul className="ListeDossiers">
       {
-        dossiers.map( 
-          dossier =>  <li key={dossier.id}><Dossier {...dossier} /></li>
-        )
+        //S'il y a un dossier:
+        dossiers[0] ?
+          dossiers.map( 
+            dossier =>  <li key={dossier.id}><Dossier {...dossier} /></li>
+          )
+        //Sinon...
+        :
+        <>
+          <div className="aucunDossier">
+          <p>votre liste de dossier est vide</p>
+          <p className="triste">;-(</p>
+          </div>
+          
+        </>
+          
       }
     </ul>
   );
