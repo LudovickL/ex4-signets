@@ -6,11 +6,27 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useState } from 'react';
 import { TwitterPicker } from 'react-color';
+import { green, red } from '@material-ui/core/colors';
+import {withStyles} from '@material-ui/core/styles';
 
 export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
   const [nom, setNom] = useState('');
   const [couverture, setCouverture] = useState('');
   const [couleur, setCouleur] = useState('#900');
+
+  const ButtonRouge = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(red[500]),
+      backgroundColor: red[900],
+    },
+  }))(Button);
+
+  const ButtonVert = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(red[500]),
+      backgroundColor: green[700],
+    },
+  }))(Button);
 
   return (
     <div className="AjouterDossier">
@@ -27,7 +43,7 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             onChange={(e) => setNom(e.target.value)}
           />
           <TextField
-            margin="dense"
+            margin="normal"
             id="urlImage"
             label="Adresse de l'image de couverture"
             type="text"
@@ -37,16 +53,17 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
           <TwitterPicker 
             width="100%" 
             triangle="hide" 
+            colors={['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC','#0693E3']}
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setOuvert(false)} color="primary">
+          <ButtonRouge id="btnAnnuler" onClick={()=>setOuvert(false)} color="primary" variant="contained">
             Annuler
-          </Button>
-          <Button onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} color="primary">
+          </ButtonRouge>
+          <ButtonVert id="btnAjouter" onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} color="secondary" variant="contained">
             Ajouter
-          </Button>
+          </ButtonVert>
         </DialogActions>
       </Dialog>
     </div>
